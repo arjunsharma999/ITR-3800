@@ -3,7 +3,7 @@ import os
 import time
 
 # DLL Setup
-dll_path = r"C:\Users\Desktop\Downloads\RadarAPI\RadarAPI\library_v1.153\Windows_mingw_x64\ITR3800_radarAPI.dll"
+dll_path = r"C:\Users\Desktop\Downloads\ITR-3811 Software Package v1.0.20250515060747886.20250515060747886\ITR-3811_v1.0\Software\RadarAPI\library_v1.155\Windows_mingw_x64\ITR3800_radarAPI.dll"
 dll_dir = os.path.dirname(dll_path)
 os.environ["PATH"] += ";" + dll_dir
 
@@ -616,166 +616,163 @@ print("Connected successfully!" if res == 0 else f"Failed to initialize. Code: {
 #----------------def set/getSimulation
 
 
-APIHandle_t = ctypes.c_void_p
-ITR3800_Result_t = ctypes.c_int
-float32_t = ctypes.c_float
+# APIHandle_t = ctypes.c_void_p
+# ITR3800_Result_t = ctypes.c_int
+# float32_t = ctypes.c_float
 
-# Declare function prototypes
-lib.ITR3800_setSimulation.restype = ITR3800_Result_t
-lib.ITR3800_setSimulation.argtypes = [APIHandle_t, ctypes.c_int]  # enable/disable is an int
+# # Declare function prototypes
+# lib.ITR3800_setSimulation.restype = ITR3800_Result_t
+# lib.ITR3800_setSimulation.argtypes = [APIHandle_t, ctypes.c_int]  # enable/disable is an int
 
-lib.ITR3800_getSimulation.restype = ITR3800_Result_t
-lib.ITR3800_getSimulation.argtypes = [APIHandle_t, ctypes.POINTER(float32_t)]
+# lib.ITR3800_getSimulation.restype = ITR3800_Result_t
+# lib.ITR3800_getSimulation.argtypes = [APIHandle_t, ctypes.POINTER(float32_t)]
 
-# ----- SET SIMULATION MODE -----
-res = lib.ITR3800_setSimulation(handle, 1)
-if res != 0:
-    print("Error – ITR3800_setSimulation failed")
-else:
-    print("Simulation mode enabled successfully.")
+# # ----- SET SIMULATION MODE -----
+# res = lib.ITR3800_setSimulation(handle, 1)
+# if res != 0:
+#     print("Error – ITR3800_setSimulation failed")
+# else:
+#     print("Simulation mode enabled successfully.")
 
-# ----- GET SIMULATION MODE STATUS -----
-enable = float32_t()
-res = lib.ITR3800_getSimulation(handle, ctypes.byref(enable))
+# # ----- GET SIMULATION MODE STATUS -----
+# enable = float32_t()
+# res = lib.ITR3800_getSimulation(handle, ctypes.byref(enable))
 
-if res != 0:
-    print("Error – ITR3800_getSimulation failed")
-else:
-    print(f"Simulation mode: {int(enable.value)}")
+# if res != 0:
+#     print("Error – ITR3800_getSimulation failed")
+# else:
+#     print(f"Simulation mode: {int(enable.value)}")
  
 
 # -------------def set/getUnitTypes
 
-APIHandle_t = ctypes.c_void_p
-ITR3800_Result_t = ctypes.c_int
-ITR3800_UnitType_t = ctypes.c_int  # Enum in C
+# APIHandle_t = ctypes.c_void_p
+# ITR3800_Result_t = ctypes.c_int
+# ITR3800_UnitType_t = ctypes.c_int  # Enum in C
 
-# === Define Enum Constants (replace with actual values from your header) ===
-ITR3800_UNIT_METER = 0     # Replace with real value if different
-ITR3800_UNIT_KMH = 1       # Replace with real value if different
+# # === Define Enum Constants (replace with actual values from your header) ===
+# ITR3800_UNIT_METER = 0     # Replace with real value if different
+# ITR3800_UNIT_KMH = 1       # Replace with real value if different
 
-# === Declare Function Prototypes ===
-lib.ITR3800_setUnitTypes.restype = ITR3800_Result_t
-lib.ITR3800_setUnitTypes.argtypes = [APIHandle_t, ITR3800_UnitType_t, ITR3800_UnitType_t]
+# # === Declare Function Prototypes ===
+# lib.ITR3800_setUnitTypes.restype = ITR3800_Result_t
+# lib.ITR3800_setUnitTypes.argtypes = [APIHandle_t, ITR3800_UnitType_t, ITR3800_UnitType_t]
 
-lib.ITR3800_getUnitTypes.restype = ITR3800_Result_t
-lib.ITR3800_getUnitTypes.argtypes = [APIHandle_t, ctypes.POINTER(ITR3800_UnitType_t), ctypes.POINTER(ITR3800_UnitType_t)]
+# lib.ITR3800_getUnitTypes.restype = ITR3800_Result_t
+# lib.ITR3800_getUnitTypes.argtypes = [APIHandle_t, ctypes.POINTER(ITR3800_UnitType_t), ctypes.POINTER(ITR3800_UnitType_t)]
 
-# === SET UNIT TYPES ===
-res = lib.ITR3800_setUnitTypes(handle, ITR3800_UNIT_METER, ITR3800_UNIT_KMH)
-if res != 0:
-    print("Error – ITR3800_setUnitTypes failed")
-else:
-    print("Unit types set successfully.")
+# # === SET UNIT TYPES ===
+# res = lib.ITR3800_setUnitTypes(handle, ITR3800_UNIT_METER, ITR3800_UNIT_KMH)
+# if res != 0:
+#     print("Error – ITR3800_setUnitTypes failed")
+# else:
+#     print("Unit types set successfully.")
 
 # === GET UNIT TYPES ===
-distance_unit = ITR3800_UnitType_t()
-velocity_unit = ITR3800_UnitType_t()
+# distance_unit = ITR3800_UnitType_t()
+# velocity_unit = ITR3800_UnitType_t()
 
-res = lib.ITR3800_getUnitTypes(handle, ctypes.byref(distance_unit), ctypes.byref(velocity_unit))
-if res != 0:
-    print("Error – ITR3800_getUnitTypes failed")
-else:
-    print(f"Distance unit: {distance_unit.value}")
-    print(f"Velocity unit: {velocity_unit.value}") 
+# res = lib.ITR3800_getUnitTypes(handle, ctypes.byref(distance_unit), ctypes.byref(velocity_unit))
+# if res != 0:
+#     print("Error – ITR3800_getUnitTypes failed")
+# else:
+#     print(f"Distance unit: {distance_unit.value}")
+#     print(f"Velocity unit: {velocity_unit.value}") 
 
 
 # ----------------def set/getStaticTargetsEnable
 
 
-APIHandle_t = ctypes.c_void_p
-ITR3800_Result_t = ctypes.c_int
-uint8_t = ctypes.c_uint8  # Equivalent to uint8_t in C
+# APIHandle_t = ctypes.c_void_p
+# ITR3800_Result_t = ctypes.c_int
+# uint8_t = ctypes.c_uint8  # Equivalent to uint8_t in C
 
-# === Declare Function Prototypes ===
-lib.ITR3800_setStaticTargetsEnable.restype = ITR3800_Result_t
-lib.ITR3800_setStaticTargetsEnable.argtypes = [APIHandle_t, ctypes.c_int]  # 1 = enable, 0 = disable
+# # === Declare Function Prototypes ===
+# lib.ITR3800_setStaticTargetsEnable.restype = ITR3800_Result_t
+# lib.ITR3800_setStaticTargetsEnable.argtypes = [APIHandle_t, ctypes.c_int]  # 1 = enable, 0 = disable
 
-lib.ITR3800_getStaticTargetsEnable.restype = ITR3800_Result_t
-lib.ITR3800_getStaticTargetsEnable.argtypes = [APIHandle_t, ctypes.POINTER(uint8_t)]
+# lib.ITR3800_getStaticTargetsEnable.restype = ITR3800_Result_t
+# lib.ITR3800_getStaticTargetsEnable.argtypes = [APIHandle_t, ctypes.POINTER(uint8_t)]
 
-# === SET STATIC TARGETS ENABLE ===
-res = lib.ITR3800_setStaticTargetsEnable(handle, 1)
-if res != 0:
-    print("Error – ITR3800_setStaticTargetsEnable failed")
-else:
-    print("Static targets enabled successfully.")
+# # === SET STATIC TARGETS ENABLE ===
+# res = lib.ITR3800_setStaticTargetsEnable(handle, 1)
+# if res != 0:
+#     print("Error – ITR3800_setStaticTargetsEnable failed")
+# else:
+#     print("Static targets enabled successfully.")
 
-# === GET STATIC TARGETS ENABLE STATUS ===
-enable = uint8_t()
-res = lib.ITR3800_getStaticTargetsEnable(handle, ctypes.byref(enable))
+# # === GET STATIC TARGETS ENABLE STATUS ===
+# enable = uint8_t()
+# res = lib.ITR3800_getStaticTargetsEnable(handle, ctypes.byref(enable))
 
-if res != 0:
-    print("Error – ITR3800_getStaticTargetsEnable failed")
-else:
-    print(f"Static targets enabled status: {enable.value}")   
-
-
-# -------------def set/getHighwayMode
-
-APIHandle_t = ctypes.c_void_p
-ITR3800_Result_t = ctypes.c_int
-uint8_t = ctypes.c_uint8  # Equivalent to uint8_t in C
-
-# === Declare Function Prototypes ===
-lib.ITR3800_setHighwayMode.restype = ITR3800_Result_t
-lib.ITR3800_setHighwayMode.argtypes = [APIHandle_t, ctypes.c_int]  # 1 = enable, 0 = disable
-
-lib.ITR3800_getHighwayMode.restype = ITR3800_Result_t
-lib.ITR3800_getHighwayMode.argtypes = [APIHandle_t, ctypes.POINTER(uint8_t)]
-
-# === ENABLE HIGHWAY MODE ===
-res = lib.ITR3800_setHighwayMode(handle, 1)
-if res != 0:
-    print("Error – ITR3800_setHighwayMode failed")
-else:
-    print("Highway mode enabled successfully.")
-
-# === GET HIGHWAY MODE STATUS ===
-enable = uint8_t()
-res = lib.ITR3800_getHighwayMode(handle, ctypes.byref(enable))
-if res != 0:
-    print("Error – ITR3800_getHighwayMode failed")
-else:
-    print(f"Highway mode: {enable.value}") 
+# if res != 0:
+#     print("Error – ITR3800_getStaticTargetsEnable failed")
+# else:
+#     print(f"Static targets enabled status: {enable.value}")   
 
 
+# # -------------def set/getHighwayMode
 
-# ---------def   set/getMaxStopTimeObject
+# APIHandle_t = ctypes.c_void_p
+# ITR3800_Result_t = ctypes.c_int
+# uint8_t = ctypes.c_uint8  # Equivalent to uint8_t in C
+
+# # === Declare Function Prototypes ===
+# lib.ITR3800_setHighwayMode.restype = ITR3800_Result_t
+# lib.ITR3800_setHighwayMode.argtypes = [APIHandle_t, ctypes.c_int]  # 1 = enable, 0 = disable
+
+# lib.ITR3800_getHighwayMode.restype = ITR3800_Result_t
+# lib.ITR3800_getHighwayMode.argtypes = [APIHandle_t, ctypes.POINTER(uint8_t)]
+
+# # === ENABLE HIGHWAY MODE ===
+# res = lib.ITR3800_setHighwayMode(handle, 1)
+# if res != 0:
+#     print("Error – ITR3800_setHighwayMode failed")
+# else:
+#     print("Highway mode enabled successfully.")
+
+# # === GET HIGHWAY MODE STATUS ===
+# enable = uint8_t()
+# res = lib.ITR3800_getHighwayMode(handle, ctypes.byref(enable))
+# if res != 0:
+#     print("Error – ITR3800_getHighwayMode failed")
+# else:
+#     print(f"Highway mode: {enable.value}") 
 
 
-APIHandle_t = ctypes.c_void_p
-ITR3800_Result_t = ctypes.c_int
-uint16_t = ctypes.c_uint16  # Equivalent to uint16_t in C
 
-# === Declare Function Prototypes ===
-lib.ITR3800_setMaxStopTimeObject.restype = ITR3800_Result_t
-lib.ITR3800_setMaxStopTimeObject.argtypes = [APIHandle_t, ctypes.c_uint16]  # 300 seconds
+# # ---------def   set/getMaxStopTimeObject
 
-lib.ITR3800_getMaxStopTimeObject.restype = ITR3800_Result_t
-lib.ITR3800_getMaxStopTimeObject.argtypes = [APIHandle_t, ctypes.POINTER(uint16_t)]
 
-# === SET MAX STOP TIME FOR STATIC OBJECTS ===
-res = lib.ITR3800_setMaxStopTimeObject(handle, 300)  # in seconds
-if res != 0:
-    print("Error – ITR3800_setMaxStopTimeObject failed")
-else:
-    print("Max stop time for static objects set successfully.")
+# APIHandle_t = ctypes.c_void_p
+# ITR3800_Result_t = ctypes.c_int
+# uint16_t = ctypes.c_uint16  # Equivalent to uint16_t in C
 
-# === GET MAX STOP TIME FOR STATIC OBJECTS ===
-time_s = uint16_t()
-res = lib.ITR3800_getMaxStopTimeObject(handle, ctypes.byref(time_s))
-if res != 0:
-    print("Error – ITR3800_getMaxStopTimeObject failed")
-else:
-    print(f"Max stop time for static objects: {time_s.value} seconds")    
+# # === Declare Function Prototypes ===
+# lib.ITR3800_setMaxStopTimeObject.restype = ITR3800_Result_t
+# lib.ITR3800_setMaxStopTimeObject.argtypes = [APIHandle_t, ctypes.c_uint16]  # 300 seconds
+
+# lib.ITR3800_getMaxStopTimeObject.restype = ITR3800_Result_t
+# lib.ITR3800_getMaxStopTimeObject.argtypes = [APIHandle_t, ctypes.POINTER(uint16_t)]
+
+# # === SET MAX STOP TIME FOR STATIC OBJECTS ===
+# res = lib.ITR3800_setMaxStopTimeObject(handle, 300)  # in seconds
+# if res != 0:
+#     print("Error – ITR3800_setMaxStopTimeObject failed")
+# else:
+#     print("Max stop time for static objects set successfully.")
+
+# # === GET MAX STOP TIME FOR STATIC OBJECTS ===
+# time_s = uint16_t()
+# res = lib.ITR3800_getMaxStopTimeObject(handle, ctypes.byref(time_s))
+# if res != 0:
+#     print("Error – ITR3800_getMaxStopTimeObject failed")
+# else:
+#     print(f"Max stop time for static objects: {time_s.value} seconds")    
 
 
 #----def getobject---------
 
-
-import ctypes
-import time
 
 # Type definitions
 APIHandle_t = ctypes.c_void_p
@@ -812,28 +809,17 @@ def setup_object_tracking(lib, handle):
     lib.ITR3800_getObjectList.restype = ITR3800_Result_t
     lib.ITR3800_getObjectList.argtypes = [APIHandle_t, ctypes.POINTER(ITR3800_ObjectList_t)]
 
-def get_object_list_safe(lib, handle):
-    """Safely get object list - start with just count"""
-    try:
-        # Initialize structure with zeros
-        object_list = ITR3800_ObjectList_t()
-        ctypes.memset(ctypes.byref(object_list), 0, ctypes.sizeof(object_list))
-        
-        print("Calling ITR3800_getObjectList...")
-        res = lib.ITR3800_getObjectList(handle, ctypes.byref(object_list))
-        
-        print(f"Function returned: {res}")
-        
-        if res != ITR3800_API_ERR_OK:
-            print(f"Error – ITR3800_getObjectList failed with code: {res}")
-            return None, res
-        else:
-            print(f"Success! Number of objects: {object_list.nrOfTracks}")
-            return object_list, res
-            
-    except Exception as e:
-        print(f"Exception occurred: {e}")
-        return None, -1
+def get_object_list_single(lib, handle):
+    """Get object list once"""
+    object_list = ITR3800_ObjectList_t()
+    res = lib.ITR3800_getObjectList(handle, ctypes.byref(object_list))
+    
+    if res != ITR3800_API_ERR_OK:
+        print(f"Error – ITR3800_getObjectList failed with code: {res}")
+        return None, res
+    else:
+        print(f"Number of objects: {object_list.nrOfTracks}")
+        return object_list, res
 
 def display_object_details(object_list):
     """Display detailed information about tracked objects"""
@@ -878,58 +864,35 @@ def continuous_object_tracking(lib, handle, duration_seconds=10, update_interval
     
     print(f"\nTracking completed after {iteration} updates")
 
-# MAIN SAFE EXECUTION - Use this to avoid segfault
-def main_safe_execution(lib, handle):
-    """Main safe execution to avoid segmentation fault"""
-    print("ITR3800 Safe Object Tracking Test")
-    print("=================================")
+# Main execution example
+def main_tracking_example(lib, handle):
+    """Main function to demonstrate object tracking"""
     
-    # Step 1: Validate prerequisites
-    print("\n1. Validating setup...")
-    if not test_function_exists(lib):
-        return
+    # Setup function prototypes
+    setup_object_tracking(lib, handle)
     
-    if not validate_handle(handle):
-        return
+    print("ITR3800 Object Tracking Started")
+    print("================================")
     
-    # Step 2: Test with minimal structure
-    print("\n2. Testing with minimal structure...")
-    safe_minimal_test(lib, handle)
-
-# Your original simple approach - but safer
-def your_original_approach_safe(lib, handle):
-    """Your original approach but with safety checks"""
-    print("=== YOUR ORIGINAL APPROACH (SAFE) ===")
+    # Test single call first
+    print("\n1. Testing single object list call...")
+    object_list, res = get_object_list_single(lib, handle)
     
-    # Setup (same as your original)
-    lib.ITR3800_getObjectList.restype = ITR3800_Result_t
-    lib.ITR3800_getObjectList.argtypes = [APIHandle_t, ctypes.POINTER(ITR3800_ObjectList_t)]
+    if object_list is not None:
+        display_object_details(object_list)
     
-    try:
-        # Call function (same as your original)
-        object_list = ITR3800_ObjectList_t()
-        print("Calling function...")
-        res = lib.ITR3800_getObjectList(handle, ctypes.byref(object_list))
-        
-        print(f"Function returned: {res}")
-        
-        if res != 0:
-            print("Error – ITR3800_getObjectList failed")
-        else:
-            print(f"Number of objects: {object_list.nrOfTracks}")
-            
-    except Exception as e:
-        print(f"Exception caught: {e}")
-        print("This might indicate a structure mismatch or invalid handle")
+    # Ask user if they want continuous tracking
+    print("\n2. Starting continuous tracking...")
+    continuous_object_tracking(lib, handle, duration_seconds=300, update_interval=0.1)
 
 # Usage example (uncomment and modify as needed):
 # 
-# # Assuming you have already loaded your library and have a handle:
-# # lib = ctypes.CDLL("your_itr3800_library.dll")  # or .so on Linux
-# # handle = your_handle_initialization_code
+# Assuming you have already loaded your library and have a handle:
+# lib = ctypes.CDLL("your_itr3800_library.dll")  # or .so on Linux
+# handle = your_handle_initialization_code
 # 
 # # Run the tracking
- main_tracking_example(lib, handle)
+main_tracking_example(lib, handle)
 
 # Alternative: Simple loop for testing
 def simple_tracking_loop(lib, handle, num_iterations=50):
@@ -951,59 +914,41 @@ def simple_tracking_loop(lib, handle, num_iterations=50):
         time.sleep(0.085)  # Wait ~85ms (matching the update rate)
 
 # Troubleshooting function
-def safe_minimal_test(lib, handle):
-    """Minimal safe test to avoid segfault"""
-    print("=== SAFE MINIMAL TEST ===")
-    print("Testing with minimal structure...")
+def debug_tracking_setup(lib, handle):
+    """Debug function to help identify issues"""
+    print("Debugging ITR3800 Object Tracking Setup")
+    print("=====================================")
     
-    # Setup function prototype
+    # Test if function exists
     try:
-        lib.ITR3800_getObjectList.restype = ITR3800_Result_t
-        lib.ITR3800_getObjectList.argtypes = [APIHandle_t, ctypes.POINTER(ITR3800_ObjectList_t)]
-        print("✓ Function prototype set successfully")
-    except Exception as e:
-        print(f"✗ Error setting function prototype: {e}")
+        func = lib.ITR3800_getObjectList
+        print("✓ ITR3800_getObjectList function found in library")
+    except AttributeError:
+        print("✗ ITR3800_getObjectList function NOT found in library")
         return
     
-    # Test the function call
-    try:
-        print("Attempting function call...")
-        object_list, res = get_object_list_safe(lib, handle)
-        
-        if object_list is not None:
-            print(f"✓ Success! Found {object_list.nrOfTracks} objects")
-        else:
-            print(f"✗ Function failed with result code: {res}")
-            
-    except Exception as e:
-        print(f"✗ Exception during function call: {e}")
-
-# Alternative approach - check if we can call the function at all
-def test_function_exists(lib):
-    """Test if the function exists in the library"""
-    try:
-        func = getattr(lib, 'ITR3800_getObjectList')
-        print(f"✓ Function found: {func}")
-        return True
-    except AttributeError:
-        print("✗ Function 'ITR3800_getObjectList' not found in library")
-        return False
-
-# Check handle validity
-def validate_handle(handle):
-    """Validate the handle"""
-    if handle is None:
-        print("✗ Handle is None")
-        return False
-    if handle == 0:
-        print("✗ Handle is 0 (invalid)")
-        return False
-    print(f"✓ Handle appears valid: {handle}")
-    return True
-
-# USAGE EXAMPLES:
-
-
+    # Test handle validity
+    if handle is None or handle == 0:
+        print("✗ Handle appears to be invalid (None or 0)")
+        return
+    else:
+        print(f"✓ Handle appears valid: {handle}")
+    
+    # Test structure size
+    obj_size = ctypes.sizeof(ITR3800_Object_t)
+    list_size = ctypes.sizeof(ITR3800_ObjectList_t)
+    print(f"✓ Object structure size: {obj_size} bytes")
+    print(f"✓ Object list structure size: {list_size} bytes")
+    
+    # Try a single call
+    print("\nTesting single function call...")
+    setup_object_tracking(lib, handle)
+    object_list, res = get_object_list_single(lib, handle)
+    
+    if res == ITR3800_API_ERR_OK:
+        print("✓ Function call successful")
+    else:
+        print(f"✗ Function call failed with code: {res}")
 
 # Assuming previous typedefs:
 # APIHandle_t = ctypes.c_void_p
